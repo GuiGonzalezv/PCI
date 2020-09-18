@@ -1,4 +1,4 @@
-# projectPCI
+# Projeto de Dispositivos móveis integrado a PCI
 
 A new Flutter project.
 
