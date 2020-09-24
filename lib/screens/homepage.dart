@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'object.dart';
+
 class HomePageScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -27,7 +29,12 @@ class _HomeScreenState extends State<HomePageScreen> {
               children: <Widget>[
                 FlatButton(
                   child: const Text('COMEÇAR'),
-                  onPressed: () {/* ... */},
+                  onPressed: () {
+                     Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TfliteHome()),
+                    );
+                  },
                 ),
               ],
             ),
