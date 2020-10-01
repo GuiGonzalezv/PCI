@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:projectPCI/screens/ObjectDetectionScreen.dart';
+import 'package:projectPCI/screens/SplashScreen.dart';
+import 'package:projectPCI/screens/homepage.dart';
 import 'package:projectPCI/screens/login.dart';
 
 void main() {
@@ -12,7 +15,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: LoginScreen()
+      home: SplashScreen(),
+      routes: {
+        "/home": (_) => new HomePageScreen(),
+        "/splashScreen": (_) => new SplashScreen(),
+        "/login": (_) => new LoginScreen(),
+        "/object": (_) => new ObjectDetectionScreen()
+      },
     );
   }
 }

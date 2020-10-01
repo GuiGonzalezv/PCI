@@ -9,12 +9,12 @@ import 'package:image/image.dart' as img;
 const String ssd = 'SSD MobileNet*';
 const String yolo = "Tiny Yolov2*";
 
-class TfliteHome extends StatefulWidget {
+class ObjectDetectionScreen extends StatefulWidget {
   @override
-  _TfliteHomeState  createState() => _TfliteHomeState();
+  _ObjectDetectionScreenState  createState() => _ObjectDetectionScreenState();
 }
 
-class _TfliteHomeState extends State<TfliteHome> {
+class _ObjectDetectionScreenState extends State<ObjectDetectionScreen> {
   String _model = ssd;
   File _image;
 
@@ -170,12 +170,14 @@ class _TfliteHomeState extends State<TfliteHome> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Object Recognize")
+        title: Text("Object Recognize"),
+        backgroundColor: Colors.deepPurple,
       ),
 
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.image),
         tooltip: "Selecione uma imagem da galeria!",
+        backgroundColor: Colors.deepPurple,
         onPressed: selectFromImagePicker,
       ),
 

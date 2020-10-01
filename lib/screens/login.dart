@@ -129,10 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () => {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HomePageScreen()),
-          )
+          Navigator.pushReplacementNamed(context, "/home")
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -260,17 +257,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: double.infinity,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF73AEF5),
-                      Color(0xFF61A4F1),
-                      Color(0xFF478DE0),
-                      Color(0xFF398AE5),
-                    ],
-                    stops: [0.1, 0.4, 0.7, 0.9],
-                  ),
+                    color: Colors.deepPurple
                 ),
               ),
               Container(
