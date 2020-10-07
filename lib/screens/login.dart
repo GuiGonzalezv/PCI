@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projectPCI/screens/homepage.dart';
 import 'package:projectPCI/utilities/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -10,6 +11,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
+  String _email;
+  String _senha;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Widget _buildEmailTF() {
     return Column(
@@ -24,7 +28,13 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
           height: 60.0,
-          child: TextField(
+          child: TextFormField(
+            validator: (input){
+              if(input.isEmpty){
+                return 'Please type an email!';
+              }
+            },
+            onSaved: (input) => _email = input,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
@@ -59,7 +69,13 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
           height: 60.0,
-          child: TextField(
+          child: TextFormField(
+            validator: (input) {
+              if(input.length < 6){
+                return "Sua senha precisa ter ao menos 6 caracteres";
+              }
+            },
+            onSaved: (input) => _senha = input,
             obscureText: true,
             style: TextStyle(
               color: Colors.white,
@@ -128,9 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => {
-          Navigator.pushReplacementNamed(context, "/home")
-        },
+        onPressed: signIn,
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -268,31 +282,35 @@ class _LoginScreenState extends State<LoginScreen> {
                     horizontal: 40.0,
                     vertical: 120.0,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Login',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
+                  child: 
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Login',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'OpenSans',
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 30.0),
-                      _buildEmailTF(),
-                      SizedBox(
-                        height: 30.0,
-                      ),
-                      _buildPasswordTF(),
-                      _buildForgotPasswordBtn(),
-                      _buildRememberMeCheckbox(),
-                      _buildLoginBtn(),
-                      _buildSignInWithText(),
-                      _buildSocialBtnRow(),
-                      _buildSignupBtn(),
-                    ],
+                        SizedBox(height: 30.0),
+                        _buildEmailTF(),
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        _buildPasswordTF(),
+                        _buildForgotPasswordBtn(),
+                        _buildRememberMeCheckbox(),
+                        _buildLoginBtn(),
+                        _buildSignInWithText(),
+                        _buildSocialBtnRow(),
+                        _buildSignupBtn(),
+                      ],
+                    ),
                   ),
                 ),
               )
@@ -301,5 +319,25 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> signIn() async{
+    final formState = _formKey.currentState;
+    if(formState.validate()){
+      try{
+        formState.save();
+        UserCredential user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _senha);
+        Navigator.pushReplacementNamed(context, "/home");
+      }catch(e){
+        AlertDialog _errorDialog = AlertDialog(
+          title: Text("Falha no login", style: TextStyle(color: Colors.white)),
+          content: Text(e.message, style: TextStyle(color: Colors.white)),
+          backgroundColor: Colors.red,
+        );
+
+        showDialog(context: context, builder: (_) => _errorDialog);
+        // print(e.message);
+      }
+    }
   }
 }

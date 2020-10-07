@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "452301528928",
+    "firebase_url": "https://projetodispositivosmovei-f2fd9.firebaseio.com",
+    "project_id": "projetodispositivosmovei-f2fd9",
+    "storage_bucket": "projetodispositivosmovei-f2fd9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452301528928:android:7b79bcfc46a7df2a72c805",
+        "android_client_info": {
+          "package_name": "com.example.projectPCI"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452301528928-nlolv5jn1vfa6se047b4h56nbp2uhi75.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXV1aWlU_PhEssHIX24w_dLESUYawnS34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452301528928-nlolv5jn1vfa6se047b4h56nbp2uhi75.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

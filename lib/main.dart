@@ -3,8 +3,13 @@ import 'package:projectPCI/screens/ObjectDetectionScreen.dart';
 import 'package:projectPCI/screens/SplashScreen.dart';
 import 'package:projectPCI/screens/homepage.dart';
 import 'package:projectPCI/screens/login.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+
+
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
